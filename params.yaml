@@ -1,0 +1,21 @@
+data_ingestion:
+  test_size: 0.2
+
+feature_engineering:
+  max_features: 5000          # max features for CountVectorizer/BOW
+  ngram_range: [1, 3]         # n-gram range for BOW (unigram to trigram)
+  custom_features_batch_size: 64
+
+model_building:
+  lgbm_params:
+    objective: multiclass
+    num_class: 3
+    metric: multi_logloss
+    is_unbalance: true
+    class_weight: balanced
+    reg_alpha: 0.1
+    reg_lambda: 0.003399270439473628
+    learning_rate: 0.08
+    max_depth: 10
+    n_estimators: 327
+    min_child_samples: 10
