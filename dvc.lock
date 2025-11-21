@@ -9,11 +9,11 @@ stages:
       size: 4277
     params:
       params.yaml:
-        data_ingestion.test_size: 0.25
+        data_ingestion.test_size: 0.2
     outs:
     - path: data/raw
       hash: md5
-      md5: 49d68ac9e22c6088d4afd89da38f5c38.dir
+      md5: e13bcce40396cd334c8a7a334868166a.dir
       size: 6919701
       nfiles: 2
   data_preprocessing:
@@ -21,12 +21,12 @@ stages:
     deps:
     - path: data/raw/test.csv
       hash: md5
-      md5: 2e81d6eb492d93987768f731e904781c
-      size: 1680931
+      md5: ea97ba82a4a25627bf4ffb52572484ea
+      size: 1348612
     - path: data/raw/train.csv
       hash: md5
-      md5: 18b3faba324bc010ea34ff2d9244645f
-      size: 5238770
+      md5: 1bd422dd6d135bced1d6c64a3e84a45d
+      size: 5571089
     - path: src/data/data_preprocessing.py
       hash: md5
       md5: 93a784d33c2ba2535b1e7c9ecc57fc58
@@ -34,7 +34,7 @@ stages:
     outs:
     - path: data/interim
       hash: md5
-      md5: 056a565b1ab539e7c535709c3d4b5e92.dir
+      md5: ba42408e7bd1e85685474d6a349ae57e.dir
       size: 5134850
       nfiles: 2
   feature_engineering:
@@ -42,11 +42,11 @@ stages:
     deps:
     - path: data/interim/train_processed.csv
       hash: md5
-      md5: b5a818f46d32f38de3b86a761aa39e1e
-      size: 3886282
+      md5: 35027dfda8274bd9356544f2ff358aa4
+      size: 4134324
     - path: params.yaml
       hash: md5
-      md5: 1107652e1c649ed5c617c520b1b5da9c
+      md5: 7c680915209566f40f7ad18f7e5cd01b
       size: 556
     - path: src/features/feature_engineering.py
       hash: md5
@@ -62,34 +62,34 @@ stages:
     outs:
     - path: data/processed/X_train_BOW_custom.pkl
       hash: md5
-      md5: d285b07dbd0da91abd477c1bfb7108f0
-      size: 8402776
+      md5: e2f12123c598267563a3cfe5d0195bc9
+      size: 8958248
     - path: data/processed/bow_vectorizer.pkl
       hash: md5
-      md5: 8a7f0ade7a77daa312ae9bf4d780a99d
-      size: 148465
+      md5: 2d106448fdb63f32583ff0ace36bf5dd
+      size: 148286
     - path: data/processed/custom_features_train.csv
       hash: md5
-      md5: d1cbf196da9cf0580811a0d42a751c88
-      size: 3230511
+      md5: f5a829a0869d61f1460214a59429a763
+      size: 3440589
     - path: data/processed/y_train.pkl
       hash: md5
-      md5: c40c071eebd015b475d3fd1bec977778
-      size: 220913
+      md5: 60ae8d5a2df233794a6287641a5253ca
+      size: 235633
   model_building:
     cmd: python src/model/model_building.py
     deps:
     - path: data/processed/X_train_BOW_custom.pkl
       hash: md5
-      md5: d285b07dbd0da91abd477c1bfb7108f0
-      size: 8402776
+      md5: e2f12123c598267563a3cfe5d0195bc9
+      size: 8958248
     - path: data/processed/y_train.pkl
       hash: md5
-      md5: c40c071eebd015b475d3fd1bec977778
-      size: 220913
+      md5: 60ae8d5a2df233794a6287641a5253ca
+      size: 235633
     - path: params.yaml
       hash: md5
-      md5: 1107652e1c649ed5c617c520b1b5da9c
+      md5: 7c680915209566f40f7ad18f7e5cd01b
       size: 556
     - path: src/model/model_building.py
       hash: md5
@@ -98,33 +98,33 @@ stages:
     outs:
     - path: models/lgbm_reddit_sentiment.pkl
       hash: md5
-      md5: 846aec7289fe4238b59bf37ea783fb1e
-      size: 4529311
+      md5: 7189f21e1d39d783403e5920d799ba18
+      size: 4531108
   model_evaluation:
     cmd: python src/model/model_evaluation.py
     deps:
     - path: data/interim/train_processed.csv
       hash: md5
-      md5: b5a818f46d32f38de3b86a761aa39e1e
-      size: 3886282
+      md5: 35027dfda8274bd9356544f2ff358aa4
+      size: 4134324
     - path: data/processed/X_train_BOW_custom.pkl
       hash: md5
-      md5: d285b07dbd0da91abd477c1bfb7108f0
-      size: 8402776
+      md5: e2f12123c598267563a3cfe5d0195bc9
+      size: 8958248
     - path: models/lgbm_reddit_sentiment.pkl
       hash: md5
-      md5: 846aec7289fe4238b59bf37ea783fb1e
-      size: 4529311
+      md5: 7189f21e1d39d783403e5920d799ba18
+      size: 4531108
     - path: src/model/model_evaluation.py
       hash: md5
-      md5: 5c4f91b7ebd9a02d07c972dbdac93283
-      size: 13966
+      md5: 7f017d1a2c25dfedd8a16df4d419b72f
+      size: 15003
     outs:
     - path: reports/classification_report.json
       hash: md5
-      md5: e490eb54a9e7d2bdce6cf00965d2c396
-      size: 903
+      md5: 81658c0c89f913d7d24a1aca4a20151b
+      size: 902
     - path: reports/confusion_matrix_test_set.png
       hash: md5
-      md5: b051b939f9ab63984e2af396b4605c87
-      size: 19662
+      md5: 345e10ab2633b9fa7ea7de82ad2e7491
+      size: 19611

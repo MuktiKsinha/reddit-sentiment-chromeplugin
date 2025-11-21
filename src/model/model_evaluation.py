@@ -116,18 +116,22 @@ def load_params(root: str) -> dict:
             params = yaml.safe_load(f)
 
         if not isinstance(params, dict):
-            raise ValueError("params.yaml loaded as string — invalid YAML formatting")
+            raise ValueError("params.yaml must load as a dictionary")
 
-        model_params = params.get("model_building", {})
-        
-        # handle nested case
-        if "lgbm_params" in model_params:
-            return model_params["lgbm_params"]
-        
-        return model_params
+        model_params = params.get("model_building")
+
+        if not isinstance(model_params, dict):
+            raise ValueError("model_building must be a dictionary")
+
+        lgbm_params = model_params.get("lgbm_params", {})
+
+        if not isinstance(lgbm_params, dict):
+            raise ValueError("lgbm_params must be a dictionary")
+
+        return lgbm_params
 
     except Exception as e:
-        logger.error('Failed to load params.yaml: %s', e)
+        logger.error("Failed to load params.yaml: %s", e)
         raise
 
 
@@ -176,6 +180,29 @@ def save_model_info(run_id: str, model_path: str, file_path: str):
         logger.error('Error saving model info: %s', e)
         raise
 
+# -----------------------------
+# NEW: Log all params recursively
+# -----------------------------
+def log_all_params(params: dict):
+    def _log_dict(d, prefix=""):
+        for k, v in d.items():
+            if isinstance(v, dict):
+                _log_dict(v, prefix=f"{prefix}{k}_")
+            else:
+                mlflow.log_param(f"{prefix}{k}", v)
+    _log_dict(params)
+
+
+# -----------------------------
+# NEW: Log all metrics from classification report
+# -----------------------------
+def log_metrics(report: dict):
+    for label, metrics_dict in report.items():
+        if isinstance(metrics_dict, dict):
+            for m_name, m_value in metrics_dict.items():
+                if m_name != "support":
+                    mlflow.log_metric(f"{label}_{m_name}", float(m_value))
+
 
 ######################################
 #        MAIN EVALUATION PIPELINE
@@ -191,14 +218,20 @@ def main():
         # Load yaml params
         params = load_params(root)
 
+        # -----------------------------
+        # Set MLflow tracking URI BEFORE experiment
+        # -----------------------------
+        mlflow.set_tracking_uri("http://ec2-51-20-254-60.eu-north-1.compute.amazonaws.com:5000/")
+
         mlflow.set_experiment("reddit_sentiment_evaluation")
 
         with mlflow.start_run() as run:
 
             # Log params
-            for key, value in params.items():
-                mlflow.log_param(key, value)
-
+            log_all_params(params)
+            
+            
+            # Load model, vectorizer, data
             model_file = os.path.join(models_dir, 'lgbm_reddit_sentiment.pkl')
             # bow_vectorizer.pkl is the fitted CountVectorizer saved in data/processed/
             vectorizer_file = os.path.join(vectorizer_dir, 'bow_vectorizer.pkl')
@@ -206,17 +239,8 @@ def main():
             features_file = os.path.join(vectorizer_dir, 'X_train_BOW_custom.pkl')
             test_file = os.path.join(interim_dir, 'test_processed.csv')
 
-            # Debug: log paths to verify they exist
-            logger.info(f"Model file path: {model_file}")
-            logger.info(f"Vectorizer file path: {vectorizer_file}")
-            logger.info(f"Features file path: {features_file}")
-            logger.info(f"Test file path: {test_file}")
-
-            # Load model + vectorizer
             model = load_model(model_file)
             vectorizer = load_vectorizer(vectorizer_file)
-
-            # Load test data
             test_df = load_data(test_file)
 
             # Validate columns
@@ -332,13 +356,16 @@ def main():
             except Exception as e:
                 logger.error('Failed to write classification report: %s', e)
 
-            # Log metrics (flattens all labels)
+            # Log metrics (handles dict and float values, including accuracy)
             if isinstance(report, dict):
                 for label, metrics_dict in report.items():
                     if isinstance(metrics_dict, dict):
                         for m_name, m_value in metrics_dict.items():
                             if m_name != "support":
                                 mlflow.log_metric(f"test_{label}_{m_name}", float(m_value))
+                    elif isinstance(metrics_dict, (float, int)):
+                        # example: accuracy
+                        mlflow.log_metric(f"test_{label}", float(metrics_dict))
 
             # Log confusion matrix (saved inside reports/ by the function)
             log_confusion_matrix(cm, "test_set")
