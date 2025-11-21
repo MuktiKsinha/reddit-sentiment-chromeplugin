@@ -89,3 +89,5 @@ target/
 .mypy_cache/
 redditenv
 models/.gitignore
+# MLflow experiment logs
+mlruns/
