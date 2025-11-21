@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/mukti/Desktop/Reddit-comment-sentiment-anaysis/mlruns/554660212018550027/models/m-e6b8d25265ab42a69bebc55a5c379caf/artifacts
+creation_timestamp: 1763720682224
+experiment_id: '554660212018550027'
+last_updated_timestamp: 1763720689928
+model_id: m-e6b8d25265ab42a69bebc55a5c379caf
+model_type: null
+name: model
+source_run_id: fa0f61fb9e4841139b79626ec73c5449
+status: 2
+status_message: null

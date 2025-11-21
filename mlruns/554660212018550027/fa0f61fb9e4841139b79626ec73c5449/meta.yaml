@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/mukti/Desktop/Reddit-comment-sentiment-anaysis/mlruns/554660212018550027/fa0f61fb9e4841139b79626ec73c5449/artifacts
+end_time: 1763720690828
+entry_point_name: ''
+experiment_id: '554660212018550027'
+lifecycle_stage: active
+run_id: fa0f61fb9e4841139b79626ec73c5449
+run_name: monumental-crow-198
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763720638525
+status: 3
+tags: []
+user_id: mukti

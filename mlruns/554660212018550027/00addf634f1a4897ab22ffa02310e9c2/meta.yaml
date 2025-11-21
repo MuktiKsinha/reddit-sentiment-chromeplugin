@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/mukti/Desktop/Reddit-comment-sentiment-anaysis/mlruns/554660212018550027/00addf634f1a4897ab22ffa02310e9c2/artifacts
+end_time: 1763712766520
+entry_point_name: ''
+experiment_id: '554660212018550027'
+lifecycle_stage: active
+run_id: 00addf634f1a4897ab22ffa02310e9c2
+run_name: dapper-koi-24
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763712747210
+status: 3
+tags: []
+user_id: mukti

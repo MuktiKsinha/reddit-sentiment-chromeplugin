@@ -47,7 +47,7 @@ def load_params():
 def load_features():
     """Load saved Bow transformed X_train and y_train."""
     try:
-        with open(os.path.join(path_processed( "X_train_features.pkl")), "rb") as f:
+        with open(os.path.join(path_processed( "X_train_BOW_custom.pkl")), "rb") as f:
             X = pickle.load(f)
 
         with open(os.path.join(path_processed("y_train.pkl")), "rb") as f:

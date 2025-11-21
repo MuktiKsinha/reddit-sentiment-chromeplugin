@@ -136,7 +136,7 @@ def apply_bow(train_data:pd.DataFrame,max_features:int,ngram_range:tuple)->tuple
         logger.debug('Bow applied with trigrams and data transformed')
         return X_train_bow,y_train
     except Exception as e:
-        logger.error('Error during TF-IDF transformation: %s', e)
+        logger.error('Error during BOW transformation: %s', e)
         raise
 
 # ---------------------------------------------------------
@@ -181,7 +181,7 @@ def main():
         # ---------------------------
         y = y_train
 
-        with open(path_processed("X_train_features.pkl"), "wb") as f:
+        with open(path_processed("X_train_BOW_custom.pkl"), "wb") as f:
             pickle.dump(X_final, f)
 
         with open(path_processed("y_train.pkl"), "wb") as f:

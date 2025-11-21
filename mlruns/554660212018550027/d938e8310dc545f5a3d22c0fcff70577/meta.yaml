@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/mukti/Desktop/Reddit-comment-sentiment-anaysis/mlruns/554660212018550027/d938e8310dc545f5a3d22c0fcff70577/artifacts
+end_time: 1763712811737
+entry_point_name: ''
+experiment_id: '554660212018550027'
+lifecycle_stage: active
+run_id: d938e8310dc545f5a3d22c0fcff70577
+run_name: shivering-skunk-803
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763712802417
+status: 3
+tags: []
+user_id: mukti

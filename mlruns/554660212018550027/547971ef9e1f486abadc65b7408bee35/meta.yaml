@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/mukti/Desktop/Reddit-comment-sentiment-anaysis/mlruns/554660212018550027/547971ef9e1f486abadc65b7408bee35/artifacts
+end_time: 1763726749359
+entry_point_name: ''
+experiment_id: '554660212018550027'
+lifecycle_stage: active
+run_id: 547971ef9e1f486abadc65b7408bee35
+run_name: caring-pug-712
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763726704688
+status: 3
+tags: []
+user_id: mukti

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/mukti/Desktop/Reddit-comment-sentiment-anaysis/mlruns/554660212018550027/703b017bf5bb45028ee85041c27d1c8d/artifacts
+end_time: 1763720101277
+entry_point_name: ''
+experiment_id: '554660212018550027'
+lifecycle_stage: active
+run_id: 703b017bf5bb45028ee85041c27d1c8d
+run_name: rumbling-toad-622
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763720041783
+status: 3
+tags: []
+user_id: mukti

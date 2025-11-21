@@ -8,14 +8,14 @@ feature_engineering:
 
 model_building:
   lgbm_params:
-    objective: multiclass
+    objective: "multiclass"
     num_class: 3
-    metric: multi_logloss
+    metric: "multi_logloss"
     is_unbalance: true
-    class_weight: balanced
+    class_weight: "balanced"
     reg_alpha: 0.1
-    reg_lambda: 0.003399270439473628
-    learning_rate: 0.08
-    max_depth: 10
-    n_estimators: 327
-    min_child_samples: 10
+    reg_lambda: 0.004
+    learning_rate: 0.04
+    max_depth: 20
+    n_estimators: 407
+    min_child_samples: 11

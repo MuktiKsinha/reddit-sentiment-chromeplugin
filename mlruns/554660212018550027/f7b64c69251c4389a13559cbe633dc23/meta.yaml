@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/mukti/Desktop/Reddit-comment-sentiment-anaysis/mlruns/554660212018550027/f7b64c69251c4389a13559cbe633dc23/artifacts
+end_time: 1763712704141
+entry_point_name: ''
+experiment_id: '554660212018550027'
+lifecycle_stage: active
+run_id: f7b64c69251c4389a13559cbe633dc23
+run_name: trusting-stork-685
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763712703628
+status: 4
+tags: []
+user_id: mukti
